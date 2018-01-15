@@ -1,0 +1,14 @@
+steps:
+- name: gcr.io/cloud-builders/docker
+  args:
+  - build
+  - --tag=gcr.io/ec-perseus/cts-api
+  - "."
+- name: gcr.io/cloud-builders/docker
+  args:
+  - tag
+  - gcr.io/ec-perseus/cts-api
+  - eu.gcr.io/ec-perseus/cts-api
+images:
+- gcr.io/ec-perseus/cts-api
+- eu.gcr.io/ec-perseus/cts-api
