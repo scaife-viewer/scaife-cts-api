@@ -58,8 +58,7 @@ repos = {
     "hlapin/ancJewLitCTS": "master",
 }
 resolved = {}
-# root_dir = "/var/lib/nautilus"
-root_dir = "./r"
+root_dir = "/var/lib/nautilus"
 
 for repo, ref in repos.items():
     sha = resolve_commit(repo, ref)
