@@ -1,0 +1,67 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: nautilus
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nautilus
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: "25%"
+  template:
+    metadata:
+      labels:
+        app: nautilus
+        version: "1"
+    spec:
+      initContainers:
+      - name: preload
+        image: gcr.io/ec-perseus/cts-api
+        imagePullPolicy: Always
+        command:
+        - python
+        - -mnautilus_cnd
+        - preload
+        volumeMounts:
+        - name: cache
+          mountPath: /var/lib/nautilus/cache
+        resources:
+          limits:
+            cpu: "1"
+            memory: 1907Mi
+      containers:
+      - name: nautilus
+        image: gcr.io/ec-perseus/cts-api
+        imagePullPolicy: Always
+        env:
+        - name: PORT
+          value: "8000"
+        - name: WEB_CONCURRENCY
+          value: "3"  # (2 x cpu) + 1
+        ports:
+        - containerPort: 8000
+        volumeMounts:
+        - name: cache
+          mountPath: /var/lib/nautilus/cache
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: 8000
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 8000
+          initialDelaySeconds: 15
+          periodSeconds: 20
+        resources:
+          limits:
+            cpu: "1"
+            memory: 1907Mi
+      volumes:
+      - name: cache
+        emptyDir: {}
