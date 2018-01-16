@@ -1,0 +1,8 @@
+steps:
+- name: gcr.io/cloud-builders/docker
+  args:
+  - build
+  - --tag=gcr.io/scaife-viewer/scaife-cts-api:$TAG_NAME
+  - "."
+images:
+- gcr.io/scaife-viewer/scaife-cts-api:$TAG_NAME

@@ -1,4 +1,4 @@
-FROM gcr.io/ec-perseus/nautilus:v1.1.1
+FROM gcr.io/scaife-viewer/nautilus-cnd:v1.1.1
 
 COPY loaddata.py /usr/local/share/nautilus/
 RUN set -ex \

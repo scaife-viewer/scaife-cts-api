@@ -19,7 +19,7 @@ spec:
     spec:
       initContainers:
       - name: preload
-        image: gcr.io/ec-perseus/cts-api
+        image: gcr.io/scaife-viewer/scaife-cts-api
         imagePullPolicy: Always
         command:
         - python
@@ -50,7 +50,7 @@ spec:
         - name: var-lib-varnish
           mountPath: /var/lib/varnish
       - name: nautilus
-        image: gcr.io/ec-perseus/cts-api
+        image: gcr.io/scaife-viewer/scaife-cts-api
         imagePullPolicy: Always
         args:
         - gunicorn
