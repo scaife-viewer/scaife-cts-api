@@ -46,19 +46,11 @@ def resolve_commit(repo, ref):
     return ref_obj["sha"]
 
 
-repos = {
-    "PerseusDL/canonical-latinLit": "master",
-    "PerseusDL/canonical-greekLit": "master",
-    "OpenGreekAndLatin/csel-dev": "master",
-    "PerseusDL/canonical-farsiLit": "master",
-    "PerseusDL/canonical-pdlpsci": "master",
-    "PerseusDL/canonical-pdlrefwk": "master",
-    "OpenGreekAndLatin/First1KGreek": "master",
-    "lascivaroma/priapeia": "master",
-    "hlapin/ancJewLitCTS": "master",
-}
 resolved = {}
 root_dir = "/var/lib/nautilus"
+
+with open(os.path.join(os.path.dirname(__file__), "corpus.json")) as fp:
+    repos = json.loads(fp.read())
 
 for repo, ref in repos.items():
     sha = resolve_commit(repo, ref)
