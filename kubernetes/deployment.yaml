@@ -1,12 +1,12 @@
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
-  name: nautilus
+  name: scaife-cts-api
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
-      app: nautilus
+      app: scaife-cts-api
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -14,7 +14,7 @@ spec:
   template:
     metadata:
       labels:
-        app: nautilus
+        app: scaife-cts-api
         version: "1"
     spec:
       initContainers:
@@ -33,29 +33,47 @@ spec:
             cpu: "1"
             memory: 1907Mi
       containers:
+      - name: varnish
+        image: jonbaldie/varnish
+        args: [
+          "/usr/sbin/varnishd",
+          "-j", "unix,user=varnish",
+          "-F",
+          "-f", "/etc/varnish/default.vcl",
+          "-t", "3600",
+          "-a", "0.0.0.0:8000",
+          "-s", "malloc,1g"
+        ]
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: var-lib-varnish
+          mountPath: /var/lib/varnish
       - name: nautilus
         image: gcr.io/ec-perseus/cts-api
         imagePullPolicy: Always
+        args:
+        - gunicorn
+        - --log-config=logging.ini
+        - app:app
         env:
         - name: PORT
-          value: "8000"
+          value: "8080"
         - name: WEB_CONCURRENCY
           value: "3"  # (2 x cpu) + 1
-        ports:
-        - containerPort: 8000
         volumeMounts:
         - name: cache
           mountPath: /var/lib/nautilus/cache
         readinessProbe:
           httpGet:
             path: /healthz
-            port: 8000
+            port: 8080
           initialDelaySeconds: 5
           periodSeconds: 10
         livenessProbe:
           httpGet:
             path: /healthz
-            port: 8000
+            port: 8080
           initialDelaySeconds: 15
           periodSeconds: 20
         resources:
@@ -64,4 +82,6 @@ spec:
             memory: 1907Mi
       volumes:
       - name: cache
+        emptyDir: {}
+      - name: var-lib-varnish
         emptyDir: {}
