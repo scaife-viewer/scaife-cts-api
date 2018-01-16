@@ -2,7 +2,7 @@ steps:
 - name: gcr.io/cloud-builders/docker
   args:
   - build
-  - --tag=gcr.io/ec-perseus/cts-api:$COMMIT_SHA
+  - --tag=gcr.io/scaife-viewer/scaife-cts-api:$COMMIT_SHA
   - "."
 images:
-- gcr.io/ec-perseus/cts-api:$COMMIT_SHA
+- gcr.io/scaife-viewer/scaife-cts-api:$COMMIT_SHA
