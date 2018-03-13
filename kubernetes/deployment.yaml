@@ -1,4 +1,4 @@
-apiVersion: apps/v1beta1
+apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
   name: scaife-cts-api
@@ -21,10 +21,7 @@ spec:
       - name: preload
         image: gcr.io/scaife-viewer/scaife-cts-api
         imagePullPolicy: Always
-        command:
-        - python
-        - -mnautilus_cnd
-        - preload
+        args: ["scaife-cts-api", "preload"]
         volumeMounts:
         - name: cache
           mountPath: /var/lib/nautilus/cache
@@ -34,28 +31,24 @@ spec:
             memory: 1907Mi
       containers:
       - name: varnish
-        image: jonbaldie/varnish
+        image: gcr.io/scaife-viewer/scaife-http-cache
+        imagePullPolicy: Always
         args: [
-          "/usr/sbin/varnishd",
+          "varnishd",
           "-j", "unix,user=varnish",
           "-F",
-          "-f", "/etc/varnish/default.vcl",
-          "-t", "3600",
+          "-b", "localhost:8080",
+          "-p", "default_ttl=3600",
+          "-p", "default_grace=3600",
           "-a", "0.0.0.0:8000",
           "-s", "malloc,1g"
         ]
         ports:
-        - containerPort: 80
-        volumeMounts:
-        - name: var-lib-varnish
-          mountPath: /var/lib/varnish
+        - containerPort: 8000
       - name: nautilus
         image: gcr.io/scaife-viewer/scaife-cts-api
         imagePullPolicy: Always
-        args:
-        - gunicorn
-        - --log-config=logging.ini
-        - app:app
+        args: ["scaife-cts-api", "serve"]
         env:
         - name: PORT
           value: "8080"
@@ -82,6 +75,4 @@ spec:
             memory: 1907Mi
       volumes:
       - name: cache
-        emptyDir: {}
-      - name: var-lib-varnish
         emptyDir: {}
