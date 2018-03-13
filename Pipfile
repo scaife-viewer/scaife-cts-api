@@ -10,6 +10,8 @@ name = "pypi"
 click = "*"
 requests = "*"
 lxml = "*"
+capitains-nautilus = "*"
+gunicorn = "*"
 
 
 [dev-packages]

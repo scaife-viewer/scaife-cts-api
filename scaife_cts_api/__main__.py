@@ -4,12 +4,18 @@ from collections import defaultdict
 
 import click
 
+from . import resolver
 from .data import load_repo, resolve_commit
 
 
 @click.group()
 def cli():
     pass
+
+
+@cli.command()
+def preload():
+    resolver.preload()
 
 
 @cli.command()
@@ -33,3 +39,22 @@ def loadcorpus(root_dir):
         click.echo(f"Loaded {repo} at {ref} to {sha}")
     with open(os.path.join(root_dir, "repos.json"), "w") as f:
         f.write(json.dumps(dict(metadata)))
+
+
+@cli.command()
+@click.option(
+    "--preload",
+    default=False,
+    is_flag=True,
+    help="preload data before running web server"
+)
+def serve(preload):
+    if preload:
+        resolver.preload()
+    args = [
+        "gunicorn",
+        "--bind=0.0.0.0",
+        "--log-config=logging.ini",
+        "scaife_cts_api.app:app",
+    ]
+    os.execvp(args[0], args)

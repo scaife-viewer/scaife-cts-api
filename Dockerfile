@@ -1,4 +1,4 @@
-FROM gcr.io/scaife-viewer/nautilus-cnd:v1.2.0
+FROM python:3-alpine3.6
 
 WORKDIR /opt/scaife-cts-api/src/
 RUN pip --no-cache-dir --disable-pip-version-check install pipenv
