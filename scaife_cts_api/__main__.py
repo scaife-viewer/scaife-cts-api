@@ -62,9 +62,10 @@ def do_load_repo(repo, ref, dest):
 def serve(preload):
     if preload:
         resolver.preload()
+    port = os.environ.get("PORT", "8000")
     args = [
         "gunicorn",
-        "--bind=0.0.0.0",
+        f"--bind=0.0.0.0:{port}",
         "--log-config=logging.ini",
         "scaife_cts_api.app:app",
     ]
