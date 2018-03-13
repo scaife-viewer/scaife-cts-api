@@ -63,10 +63,12 @@ def serve(preload):
     if preload:
         resolver.preload()
     port = os.environ.get("PORT", "8000")
+    workers = os.environ.get("WEB_CONCURRENCY", "1")
     args = [
         "gunicorn",
         f"--bind=0.0.0.0:{port}",
+        f"--workers={workers}",
         "--log-config=logging.ini",
         "scaife_cts_api.app:app",
     ]
-    os.execvpe(args[0], args, os.environ.copy())
+    os.execvp(args[0], args)
