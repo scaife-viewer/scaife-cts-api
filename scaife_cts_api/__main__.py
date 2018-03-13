@@ -68,4 +68,4 @@ def serve(preload):
         "--log-config=logging.ini",
         "scaife_cts_api.app:app",
     ]
-    os.execvp(args[0], args)
+    os.execvpe(args[0], args, os.environ.copy())
