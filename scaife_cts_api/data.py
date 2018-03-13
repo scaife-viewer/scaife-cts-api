@@ -1,26 +1,22 @@
-#!/usr/bin/env python
-import json
-import os
 import re
+import os
 import subprocess
-import sys
+import glob
 
 import requests
+from lxml import etree
 
 
 def load_repo(tarball_url, dest):
     resp = requests.get(tarball_url, stream=True)
     resp.raise_for_status()
-
     r, w = os.pipe()
     proc = subprocess.Popen(["tar", "-zxf", "-", "-C", dest], stdin=r)
     os.close(r)
-
     for chunk in resp.iter_content(chunk_size=4092):
         if chunk:
             os.write(w, chunk)
     os.close(w)
-
     proc.wait()
 
 
@@ -44,23 +40,3 @@ def resolve_commit(repo, ref):
         resp.raise_for_status()
         ref_obj = resp.json()["object"]
     return ref_obj["sha"]
-
-
-resolved = {}
-root_dir = "/var/lib/nautilus"
-
-with open(os.path.join(os.path.dirname(__file__), "corpus.json")) as fp:
-    repos = json.loads(fp.read())
-
-for repo, ref in repos.items():
-    sha = resolve_commit(repo, ref)
-    load_repo(
-        f"https://api.github.com/repos/{repo}/tarball/{sha}",
-        os.path.join(root_dir, "data"),
-    )
-    resolved[repo] = sha
-    print(f"Loaded {repo} at {ref} to {sha}")
-    sys.stdout.flush()
-
-with open(os.path.join(root_dir, "repos.json"), "w") as f:
-    f.write(json.dumps(resolved))
