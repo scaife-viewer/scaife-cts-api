@@ -29,7 +29,7 @@ def loadcorpus(root_dir):
             os.path.join(root_dir, "data"),
         )
         metadata[repo]["sha"] = sha
-        repo_path = os.path.join(root_dir, "data", f"{repo.replace('/', '-')}-{sha[:7]}")
+        # repo_path = os.path.join(root_dir, "data", f"{repo.replace('/', '-')}-{sha[:7]}")
         click.echo(f"Loaded {repo} at {ref} to {sha}")
     with open(os.path.join(root_dir, "repos.json"), "w") as f:
         f.write(json.dumps(dict(metadata)))

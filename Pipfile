@@ -1,0 +1,25 @@
+[[source]]
+
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+
+[packages]
+
+click = "*"
+requests = "*"
+lxml = "*"
+
+
+[dev-packages]
+
+mypy = "*"
+"flake8" = "*"
+"flake8-quotes" = "*"
+isort = "*"
+
+
+[requires]
+
+python_version = "3.6"

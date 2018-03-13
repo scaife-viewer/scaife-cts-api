@@ -1,10 +1,8 @@
-import re
 import os
+import re
 import subprocess
-import glob
 
 import requests
-from lxml import etree
 
 
 def load_repo(tarball_url, dest):
