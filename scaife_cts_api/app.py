@@ -4,6 +4,7 @@ import logging
 from capitains_nautilus.flask_ext import FlaskNautilus
 from flask import Flask, jsonify
 from flask_caching import Cache
+from raven.contrib.flask import Sentry
 
 from .resolver import resolver
 
@@ -19,6 +20,7 @@ nautilus = FlaskNautilus(
     logger=logging.getLogger("nautilus"),
 )
 http_cache.init_app(app)
+Sentry(app)
 
 
 @app.route("/repos")

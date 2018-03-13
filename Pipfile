@@ -12,6 +12,7 @@ requests = "*"
 lxml = "*"
 capitains-nautilus = "*"
 gunicorn = "*"
+raven = {extras = ["flask"]}
 
 
 [dev-packages]

@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "5076bb69b8ad2a29acb6f3e1e9dab7fde0cd33ee25efc84f4e1051326daa6500"
+            "sha256": "09442c30187f45ebf07d32f510885d3d5ef6c33bcdc39735c34867b2bab4d1c3"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -16,6 +16,12 @@
         ]
     },
     "default": {
+        "blinker": {
+            "hashes": [
+                "sha256:471aee25f3992bd325afa3772f1063dbdbbca947a041b8b89466dc00d606f8b6"
+            ],
+            "version": "==1.4"
+        },
         "capitains-nautilus": {
             "hashes": [
                 "sha256:550a701c99ed52146665b53a4e712c7b57ea701928730f1a93d6dfc61abb5b16"
@@ -44,6 +50,14 @@
             ],
             "index": "pypi",
             "version": "==6.7"
+        },
+        "contextlib2": {
+            "hashes": [
+                "sha256:509f9419ee91cdd00ba34443217d5ca51f5a364a404e1dce9e8979cea969ca48",
+                "sha256:f5260a6e679d2ff42ec91ec5252f4eeffdcf21053db9113bd0a8e4d953769c00"
+            ],
+            "markers": "python_version < '3.2'",
+            "version": "==0.5.5"
         },
         "flask": {
             "hashes": [
@@ -156,6 +170,14 @@
                 "sha256:fee43f17a9c4087e7ed1605bd6df994c6173c1e977d7ade7b651292fab2bd010"
             ],
             "version": "==2.2.0"
+        },
+        "raven": {
+            "hashes": [
+                "sha256:738a52019d01955d5b44b49d67c9f2f4cedb1b4f70d4fb0b493931174d00e044",
+                "sha256:92bf4c4819472ed20f1b9905eeeafe1bc6fe5f273d7c14506fdb8fb3a6ab2074"
+            ],
+            "index": "pypi",
+            "version": "==6.6.0"
         },
         "rdflib": {
             "hashes": [
