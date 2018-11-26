@@ -1,11 +1,13 @@
 import json
 import logging
+import os
 
 from capitains_nautilus.flask_ext import FlaskNautilus
 from flask import Flask, jsonify
 from flask_caching import Cache
 from raven.contrib.flask import Sentry
 
+from .data import ROOT_DIR_PATH
 from .resolver import resolver
 
 
@@ -25,7 +27,8 @@ Sentry(app)
 
 @app.route("/repos")
 def repos():
-    with open("/var/lib/nautilus/repos.json", "r") as f:
+    repos_json = os.path.join(ROOT_DIR_PATH, "repos.json")
+    with open(repos_json, "r") as f:
         return jsonify(json.loads(f.read()))
 
 
