@@ -6,7 +6,7 @@ from collections import defaultdict
 import click
 
 from . import resolver
-from .data import load_repo, resolve_commit
+from .data import ROOT_DIR_PATH, load_repo, resolve_commit
 
 
 @click.group()
@@ -22,7 +22,7 @@ def preload():
 @cli.command()
 @click.option(
     "--root-dir",
-    default="/var/lib/nautilus",
+    default=ROOT_DIR_PATH,
     help="root directory to store corpus, cache and metadata",
 )
 def loadcorpus(root_dir):
