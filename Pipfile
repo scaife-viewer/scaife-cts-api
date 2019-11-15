@@ -11,6 +11,7 @@ capitains-nautilus = "~=1.0.3"
 gunicorn = "~=19.9.0"
 raven = {version = "~=6.9.0",extras = ["flask"]}
 mycapytain = "~=2.0.9"
+pygithub = "~=1.44.1"
 
 [dev-packages]
 mypy = "~=0.620"
