@@ -1,28 +1,22 @@
 [[source]]
-
 url = "https://pypi.python.org/simple"
 verify_ssl = true
 name = "pypi"
 
-
 [packages]
-
-click = "*"
-requests = "*"
-lxml = "*"
-capitains-nautilus = "*"
-gunicorn = "*"
-raven = {extras = ["flask"]}
-
+click = "~=6.7"
+requests = "~=2.19.1"
+lxml = "~=4.2.4"
+capitains-nautilus = "~=1.0.3"
+gunicorn = "~=19.9.0"
+raven = {version = "~=6.9.0",extras = ["flask"]}
+mycapytain = "~=2.0.9"
 
 [dev-packages]
-
-mypy = "*"
-"flake8" = "*"
-"flake8-quotes" = "*"
-isort = "*"
-
+mypy = "~=0.620"
+"flake8" = "~=3.5.0"
+"flake8-quotes" = "~=1.0.0"
+isort = "~=4.3.4"
 
 [requires]
-
 python_version = "3.6"
