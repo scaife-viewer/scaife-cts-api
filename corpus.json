@@ -1,12 +1,13 @@
 {
-  "PerseusDL/canonical-latinLit": "c001efb82bc26ba95e935ce2fb4756d1dff0a688",
-  "PerseusDL/canonical-greekLit": "7d369824dae81c5b4bc94943254b086d5906e47f",
-  "OpenGreekAndLatin/csel-dev": "fe80c57e88302917eaeac5dc6ecc81be5f3fb83a",
+  "PerseusDL/canonical-latinLit": "a6f4913394156fb59e8cd7520c77d81e575ca4de",
+  "PerseusDL/canonical-greekLit": "c1ebbde8c7e8f333661b9e2a67ca690b0d864d66",
+  "OpenGreekAndLatin/csel-dev": "1d5b9eb7f1d8659df1dec075d09aceb788118de3",
   "PerseusDL/canonical-farsiLit": "1ce632ece8a2af0646195a0531f5e8f39b161f72",
-  "PerseusDL/canonical-pdlpsci": "2bd7e1d2acec2c442d3c676f50d15eac565e9457",
-  "OpenGreekAndLatin/First1KGreek": "160f2a6c3e55fc6a2a0913a23181e8ee946645b9",
-  "lascivaroma/priapeia": "64d5d916d1220ec4db8a848ce74998e9b6cdec71",
+  "PerseusDL/canonical-pdlpsci": "8acfebb2e76bf48f243b3c84e4b65c4ceae8b7a6",
+  "OpenGreekAndLatin/First1KGreek": "5dfff770292cedf29c5139c11f51e5c3d3aec0bf",
+  "lascivaroma/priapeia": "3dfc11fe1bbbe5f34c435e6cd56cc277cdacbe8f",
   "hlapin/ancJewLitCTS": "f3534557c6cae678bccbbf0d97ac2b2cdf71cc2e",
   "nevenjovanovic/sophocles-ajax-latinus": "aee7611f65a30b8fe17f1833154988c811e886b3",
-  "PersDigUMD/PDL": "1d9ec2450d62874f60dc5fd9e6c55c7048c5a36c"
+  "jacobwegner/PDL": "bd84a35249a26aebf3810604cbf901a31f83e65a",
+  "jacobwegner/Multepal-CTS": "976a340223666380ece66a936bdd58330b822e40"
 }
