@@ -11,7 +11,8 @@ RUN set -ex \
     && source $VIRTUAL_ENV/bin/activate \
     && pip install -r requirements.txt \
     && apk del .build-deps
-COPY . ./
+COPY logging.ini setup.cfg setup.py ./
+COPY scaife_cts_api ./scaife_cts_api
 RUN set -ex \
     && runDeps="$( \
       scanelf --needed --nobanner --format '%n#p' --recursive /opt/scaife-cts-api \
@@ -26,3 +27,8 @@ RUN set -ex \
     && source $VIRTUAL_ENV/bin/activate \
     && pip --no-cache-dir --disable-pip-version-check install -e . \
     && apk del .fetch-deps
+COPY corpus.json ./
+RUN scaife-cts-api loadcorpus \
+  && scaife-cts-api preload
+
+CMD ["scaife-cts-api", "serve"]
