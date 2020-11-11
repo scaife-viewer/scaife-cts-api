@@ -31,6 +31,12 @@ def repos():
     with open(repos_json, "r") as f:
         return jsonify(json.loads(f.read()))
 
+@app.route("/corpus-metadata")
+def corpus_metadata():
+    repos_json = os.path.join(ROOT_DIR_PATH, ".scaife-viewer.json")
+    with open(repos_json, "r") as f:
+        return jsonify(json.loads(f.read()))
+
 
 @app.route("/healthz")
 def healthz():

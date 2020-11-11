@@ -37,19 +37,35 @@ def loadcorpus(root_dir):
             fs[f] = (repo, ref)
         for f in concurrent.futures.as_completed(fs):
             repo, ref = fs[f]
-            sha = f.result()
-            metadata[repo]["sha"] = sha
-            # repo_path = os.path.join(root_dir, "data", f"{repo.replace('/', '-')}-{sha[:7]}")
-            click.echo(f"Loaded {repo} at {ref} to {sha}")
+            data = f.result()
+            metadata[repo].update(data)
+            click.echo(f"Loaded {repo} at {ref} to {data['sha']}")
     with open(os.path.join(root_dir, "repos.json"), "w") as f:
         f.write(json.dumps(dict(metadata)))
+
+
+def write_repo_metadata(repo, data, dest):
+    sv_metadata_path = os.path.join(dest, data["tarball_path"], ".scaife-viewer.json")
+    metadata = {
+        "repo": repo,
+        "sha": data["sha"],
+    }
+    json.dump(metadata, open(sv_metadata_path, "w"), indent=2)
 
 
 def do_load_repo(repo, ref, dest):
     sha = resolve_commit(repo, ref)
     tarball_url = f"https://api.github.com/repos/{repo}/tarball/{sha}"
+    tarball_path = f"{repo.replace('/', '-')}-{sha[:7]}"
     load_repo(tarball_url, dest)
-    return sha
+    repo_metadata = {
+        "sha": sha,
+        # include the extracted folder path for the tarball
+        # when retrieved from the GitHub API
+        "tarball_path": tarball_path,
+    }
+    write_repo_metadata(repo, repo_metadata, dest)
+    return repo_metadata
 
 
 @cli.command()
