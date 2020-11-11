@@ -78,10 +78,8 @@ def do_load_repo(repo, ref, dest):
 def serve(preload):
     if preload:
         resolver.preload()
-    workers = os.environ.get("WEB_CONCURRENCY", "1")
     args = [
         "gunicorn",
-        f"--workers={workers}",
         "--log-config=logging.ini",
         "scaife_cts_api.app:app",
     ]
