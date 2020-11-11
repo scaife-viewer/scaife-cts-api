@@ -1,0 +1,29 @@
+-i https://pypi.python.org/simple
+blinker==1.4
+capitains-nautilus==1.0.3
+certifi==2018.8.24
+chardet==3.0.4
+click==6.7
+flask-caching==1.4.0
+flask==1.0.2
+future==0.16.0
+gunicorn==19.9.0
+idna==2.7
+isodate==0.6.0
+itsdangerous==0.24
+jinja2==2.10
+lxml==4.2.4
+markupsafe==1.0
+# mycapytain==2.0.9
+# @@@ backport https://github.com/Capitains/MyCapytain/pull/200
+https://github.com/jacobwegner/MyCapytain/archive/2dae321722c06fe8873c5f06b3f8fdbd45f643c2.zip
+pyparsing==2.2.0
+raven==6.9.0
+rdflib-jsonld==0.4.0
+rdflib==4.2.2
+redis==2.10.6
+requests==2.19.1
+six==1.11.0
+tornado==5.1 ; python_version != '3.3.*' and python_version != '3.0.*' and python_version >= '2.7' and python_version != '3.1.*' and python_version != '3.2.*'
+urllib3==1.23 ; python_version != '3.2.*' and python_version != '3.3.*' and python_version < '4' and python_version >= '2.6' and python_version != '3.0.*' and python_version != '3.1.*'
+werkzeug==0.14.1
