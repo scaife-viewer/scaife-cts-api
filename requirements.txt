@@ -17,6 +17,7 @@ markupsafe==1.1.1
 # mycapytain==2.0.9
 # @@@ backport https://github.com/Capitains/MyCapytain/pull/200
 https://github.com/jacobwegner/MyCapytain/archive/2dae321722c06fe8873c5f06b3f8fdbd45f643c2.zip
+PyGithub==1.53
 pyparsing==2.2.0
 raven==6.9.0
 rdflib-jsonld==0.4.0
