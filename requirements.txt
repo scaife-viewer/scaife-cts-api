@@ -11,7 +11,7 @@ gunicorn==19.9.0
 idna==2.7
 isodate==0.6.0
 itsdangerous==0.24
-jinja2==2.10
+jinja2==2.11.3
 lxml==4.2.4
 markupsafe==1.1.1
 # mycapytain==2.0.9
