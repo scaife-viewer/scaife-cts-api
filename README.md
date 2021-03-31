@@ -13,3 +13,5 @@ export GITHUB_ACCESS_TOKEN=<token>
 python scaife_cts_api/update_corpus_shas.py
 ```
 - Open a new pull request with the changes
+- Use the review app to preview data changes
+- Continue promotion using the scaife.perseus.org operations manual
