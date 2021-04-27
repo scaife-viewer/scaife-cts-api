@@ -20,22 +20,35 @@ def main():
 
     status = []
     corpus = json.load(open("corpus.json"))
-    for repo_name, sha in corpus.items():
+    new_corpus = dict()
+    for repo_name, data in corpus.items():
+        sha = data["sha"]
         diff_url = ""
         repo = client.get_repo(repo_name)
         try:
             latest_release = repo.get_latest_release()
-            latest_commit_sha = repo.get_commit(latest_release.target_commitish).sha
+            ref = latest_release.tag_name
+            latest_commit_sha = repo.get_commit(ref).sha
+            tarball_url = latest_release.tarball_url
         except UnknownObjectException:
             print(
                 f'{repo_name} has no release data.  retreiving latest SHA from "{repo.default_branch}"'
             )
             default_branch = repo.get_branch(repo.default_branch)
+            ref = default_branch.name
             latest_commit_sha = default_branch.commit.sha
+            tarball_url = f"https://api.github.com/repos/{repo_name}/tarball/{latest_commit_sha}"
+
         should_update = latest_commit_sha != sha
         if should_update:
             compared = repo.compare(sha, latest_commit_sha)
             diff_url = compared.html_url
+
+        new_corpus[repo_name] = dict(
+            ref=ref,
+            sha=latest_commit_sha,
+            tarball_url=tarball_url
+        )
         status.append(
             [
                 repo.full_name,
@@ -45,10 +58,6 @@ def main():
                 diff_url,
             ]
         )
-
-    new_corpus = dict()
-    for row in status:
-        new_corpus[row[0]] = row[3]
     json.dump(new_corpus, open("corpus.json", "w"), indent=2)
 
 
