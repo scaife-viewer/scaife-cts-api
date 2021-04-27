@@ -54,8 +54,9 @@ def do_load_repo(repo, data, dest):
     ref = data["ref"]
     sha = data["sha"]
     tarball_url = f"https://api.github.com/repos/{repo}/tarball/{sha}"
-    tarball_path = f"{repo.replace('/', '-')}-{sha[:7]}"
-    load_repo(tarball_url, dest)
+    tarball_path = f"{repo.replace('/', '-')}-{ref}-{sha[:7]}"
+    absolute_tarball_path = os.path.join(dest, tarball_path)
+    load_repo(tarball_url, absolute_tarball_path)
     repo_metadata = {
         "repo": repo,
         "sha": sha,
