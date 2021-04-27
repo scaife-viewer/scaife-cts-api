@@ -44,10 +44,8 @@ def loadcorpus(root_dir):
         f.write(json.dumps(dict(metadata)))
 
 
-def write_repo_metadata(repo, data, dest):
-    tarball_path = data.pop("tarball_path")
-    sv_metadata_path = os.path.join(dest, tarball_path, ".scaife-viewer.json")
-    json.dump(data, open(sv_metadata_path, "w"), indent=2)
+def write_repo_metadata(metadata_path, data):
+    json.dump(data, open(metadata_path, "w"), indent=2)
 
 
 def do_load_repo(repo, data, dest):
@@ -61,12 +59,10 @@ def do_load_repo(repo, data, dest):
         "repo": repo,
         "sha": sha,
         "ref": ref,
-        # include the extracted folder path for the tarball
-        # when retrieved from the GitHub API
-        "tarball_path": tarball_path,
         "tarball_url": tarball_url,
     }
-    write_repo_metadata(repo, repo_metadata, dest)
+    metadata_path = os.path.join(absolute_tarball_path, ".scaife-viewer.json")
+    write_repo_metadata(metadata_path, repo_metadata)
     return repo_metadata
 
 
