@@ -28,6 +28,8 @@ def main():
         try:
             latest_release = repo.get_latest_release()
             ref = latest_release.tag_name
+            # NOTE: latest_commit_sha will differ from latest_release.target_committish, because
+            # the release was created and then the tag was advanced if a HookSet was used
             latest_commit_sha = repo.get_commit(ref).sha
             tarball_url = latest_release.tarball_url
         except UnknownObjectException:
