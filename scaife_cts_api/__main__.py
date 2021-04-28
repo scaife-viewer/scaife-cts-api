@@ -6,7 +6,7 @@ from collections import defaultdict
 import click
 
 from . import resolver
-from .data import ROOT_DIR_PATH, load_repo, resolve_commit
+from .data import ROOT_DIR_PATH, load_repo
 
 
 @click.group()
@@ -31,10 +31,10 @@ def loadcorpus(root_dir):
         repos = json.loads(fp.read())
     fs = {}
     with concurrent.futures.ThreadPoolExecutor(max_workers=2) as executor:
-        for repo, ref in repos.items():
+        for repo, data in repos.items():
             dest = os.path.join(root_dir, "data")
-            f = executor.submit(do_load_repo, repo, ref, dest)
-            fs[f] = (repo, ref)
+            f = executor.submit(do_load_repo, repo, data, dest)
+            fs[f] = (repo, data["ref"])
         for f in concurrent.futures.as_completed(fs):
             repo, ref = fs[f]
             data = f.result()
@@ -44,27 +44,25 @@ def loadcorpus(root_dir):
         f.write(json.dumps(dict(metadata)))
 
 
-def write_repo_metadata(repo, data, dest):
-    sv_metadata_path = os.path.join(dest, data["tarball_path"], ".scaife-viewer.json")
-    metadata = {
-        "repo": repo,
-        "sha": data["sha"],
-    }
-    json.dump(metadata, open(sv_metadata_path, "w"), indent=2)
+def write_repo_metadata(metadata_path, data):
+    json.dump(data, open(metadata_path, "w"), indent=2)
 
 
-def do_load_repo(repo, ref, dest):
-    sha = resolve_commit(repo, ref)
-    tarball_url = f"https://api.github.com/repos/{repo}/tarball/{sha}"
-    tarball_path = f"{repo.replace('/', '-')}-{sha[:7]}"
-    load_repo(tarball_url, dest)
+def do_load_repo(repo, data, dest):
+    ref = data["ref"]
+    sha = data["sha"]
+    tarball_url = data["tarball_url"]
+    tarball_path = f"{repo.replace('/', '-')}-{ref}-{sha[:7]}"
+    absolute_tarball_path = os.path.join(dest, tarball_path)
+    load_repo(tarball_url, absolute_tarball_path)
     repo_metadata = {
+        "repo": repo,
         "sha": sha,
-        # include the extracted folder path for the tarball
-        # when retrieved from the GitHub API
-        "tarball_path": tarball_path,
+        "ref": ref,
+        "tarball_url": tarball_url,
     }
-    write_repo_metadata(repo, repo_metadata, dest)
+    metadata_path = os.path.join(absolute_tarball_path, ".scaife-viewer.json")
+    write_repo_metadata(metadata_path, repo_metadata)
     return repo_metadata
 
 

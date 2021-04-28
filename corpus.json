@@ -1,14 +1,62 @@
 {
-  "PerseusDL/canonical-latinLit": "47239d3a181f64551267d7a166ee6573a6d44e67",
-  "PerseusDL/canonical-greekLit": "25c5fc1c3ed5dbda4c8f49b2567fe50449fb2b02",
-  "OpenGreekAndLatin/csel-dev": "35c62f2df3112086d615946adf77a7e04aa000ee",
-  "PerseusDL/canonical-farsiLit": "1ce632ece8a2af0646195a0531f5e8f39b161f72",
-  "PerseusDL/canonical-pdlpsci": "8acfebb2e76bf48f243b3c84e4b65c4ceae8b7a6",
-  "OpenGreekAndLatin/First1KGreek": "574344dd21783a9659874c9782112ad91772f08f",
-  "OpenGreekAndLatin/Latin": "ff5b4bb27d867794dd0c2e0cbadc3aca63e50d17",
-  "lascivaroma/priapeia": "3dfc11fe1bbbe5f34c435e6cd56cc277cdacbe8f",
-  "hlapin/ancJewLitCTS": "f3534557c6cae678bccbbf0d97ac2b2cdf71cc2e",
-  "nevenjovanovic/sophocles-ajax-latinus": "aee7611f65a30b8fe17f1833154988c811e886b3",
-  "jacobwegner/PDL": "eca3d09f9516c85173bece362749d0cb40c261df",
-  "jacobwegner/Multepal-CTS": "976a340223666380ece66a936bdd58330b822e40"
+  "PerseusDL/canonical-latinLit": {
+    "ref": "0.0.843",
+    "sha": "ae36df4f6407544a661ae8f9f22ba2adcb893e96",
+    "tarball_url": "https://api.github.com/repos/PerseusDL/canonical-latinLit/tarball/0.0.843"
+  },
+  "PerseusDL/canonical-greekLit": {
+    "ref": "0.0.2781",
+    "sha": "1007df81237e3e4efc17bf7f0d03252e64a1b9d6",
+    "tarball_url": "https://api.github.com/repos/PerseusDL/canonical-greekLit/tarball/0.0.2781"
+  },
+  "OpenGreekAndLatin/csel-dev": {
+    "ref": "1.0.221",
+    "sha": "34643e103acdd1dc49dd74d92b0f272ca345aea4",
+    "tarball_url": "https://api.github.com/repos/OpenGreekAndLatin/csel-dev/tarball/1.0.221"
+  },
+  "PerseusDL/canonical-farsiLit": {
+    "ref": "0.0.11",
+    "sha": "a26b9a0f62aabd970a9fac26afa60d83e8a38823",
+    "tarball_url": "https://api.github.com/repos/PerseusDL/canonical-farsiLit/tarball/0.0.11"
+  },
+  "PerseusDL/canonical-pdlpsci": {
+    "ref": "0.0.56",
+    "sha": "2bd7e1d2acec2c442d3c676f50d15eac565e9457",
+    "tarball_url": "https://api.github.com/repos/PerseusDL/canonical-pdlpsci/tarball/0.0.56"
+  },
+  "OpenGreekAndLatin/First1KGreek": {
+    "ref": "1.1.5222",
+    "sha": "8a96ef98161e6fc4795ed783623bcae2c7e50ebd",
+    "tarball_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/tarball/1.1.5222"
+  },
+  "OpenGreekAndLatin/Latin": {
+    "ref": "v1.10.0",
+    "sha": "ff5b4bb27d867794dd0c2e0cbadc3aca63e50d17",
+    "tarball_url": "https://api.github.com/repos/OpenGreekAndLatin/Latin/tarball/v1.10.0"
+  },
+  "lascivaroma/priapeia": {
+    "ref": "1.1.18",
+    "sha": "0a75c5c2fba85cef125555ea35029409585c54cb",
+    "tarball_url": "https://api.github.com/repos/lascivaroma/priapeia/tarball/1.1.18"
+  },
+  "hlapin/ancJewLitCTS": {
+    "ref": "0.1.50",
+    "sha": "f3534557c6cae678bccbbf0d97ac2b2cdf71cc2e",
+    "tarball_url": "https://api.github.com/repos/hlapin/ancJewLitCTS/tarball/0.1.50"
+  },
+  "nevenjovanovic/sophocles-ajax-latinus": {
+    "ref": "master",
+    "sha": "aee7611f65a30b8fe17f1833154988c811e886b3",
+    "tarball_url": "https://api.github.com/repos/nevenjovanovic/sophocles-ajax-latinus/tarball/aee7611f65a30b8fe17f1833154988c811e886b3"
+  },
+  "jacobwegner/PDL": {
+    "ref": "v0.0.2",
+    "sha": "eca3d09f9516c85173bece362749d0cb40c261df",
+    "tarball_url": "https://api.github.com/repos/jacobwegner/PDL/tarball/v0.0.2"
+  },
+  "jacobwegner/Multepal-CTS": {
+    "ref": "v0.0.1-rc4",
+    "sha": "f101dd39a7f98eea0442678cac4f83306707d51a",
+    "tarball_url": "https://api.github.com/repos/jacobwegner/Multepal-CTS/tarball/v0.0.1-rc4"
+  }
 }
