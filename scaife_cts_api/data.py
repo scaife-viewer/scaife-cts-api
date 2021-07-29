@@ -5,7 +5,7 @@ import subprocess
 import requests
 
 
-ROOT_DIR_PATH = os.environ.get("ROOT_DIR", "/var/lib/nautilus")
+ROOT_DIR_PATH = os.environ.get("ROOT_DIR", "nautilus")
 
 
 def load_repo(tarball_url, dest):
