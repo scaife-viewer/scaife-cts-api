@@ -2,6 +2,7 @@ import json
 import os
 from collections import defaultdict
 from glob import glob
+from pathlib import Path
 
 from MyCapytain.errors import UndispatchedTextError
 from capitains_nautilus.cts.resolver import (
@@ -17,14 +18,14 @@ from werkzeug.contrib.cache import FileSystemCache
 from .data import ROOT_DIR_PATH
 
 
-root_dir_path = os.environ.get("ROOT_DIR", ROOT_DIR_PATH)
-data_path = os.path.join(root_dir_path, "data")
-cache_path = os.path.join(root_dir_path, "cache")
+root_dir_path = Path(os.environ.get("ROOT_DIR", ROOT_DIR_PATH))
+data_path = Path(root_dir_path, "data")
+cache_path = Path(root_dir_path, "cache")
 
-if not os.path.exists(data_path):
-    os.mkdir(data_path)
-if not os.path.exists(cache_path):
-    os.mkdir(cache_path)
+if not data_path.exists():
+    data_path.mkdir(parents=True, exist_ok=True)
+if not cache_path.exists():
+    cache_path.mkdir(parents=True, exist_ok=True)
 
 CACHE_THRESHOLD = 0  # A 0 value is treated by the cache backend as
                      # "no threshold", which will prevent the
@@ -37,7 +38,7 @@ cache = FileSystemCache(cache_path, threshold=CACHE_THRESHOLD)
 class NautilusCTSResolver(BaseNautilusCTSResolver):
 
     def extract_sv_metadata(self, folder):
-        metadata_path = os.path.join(folder, ".scaife-viewer.json")
+        metadata_path = Path(folder, ".scaife-viewer.json")
         try:
             return json.load(open(metadata_path))
         except FileNotFoundError:
@@ -161,7 +162,7 @@ class NautilusCTSResolver(BaseNautilusCTSResolver):
                     del self.dispatcher.collection[removable]
 
             # @@@ write out our own "inventory"
-        corpus_metadata_path = os.path.join(root_dir_path, ".scaife-viewer.json")
+        corpus_metadata_path = Path(root_dir_path, ".scaife-viewer.json")
         json.dump(list(repo_urn_lookup.values()), open(corpus_metadata_path, "w"), indent=2)
 
         self.inventory = self.dispatcher.collection
@@ -170,9 +171,9 @@ class NautilusCTSResolver(BaseNautilusCTSResolver):
 
 resolver = NautilusCTSResolver(
     [
-        os.path.join(data_path, entry)
-        for entry in os.listdir(data_path)
-        if os.path.isdir(os.path.join(data_path, entry))
+        Path(data_path, entry)
+        for entry in data_path.iterdir()
+        if Path(data_path, entry).is_dir()
     ],
     cache=cache
 )

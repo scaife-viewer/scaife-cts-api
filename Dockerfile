@@ -28,6 +28,7 @@ RUN set -ex \
     && pip --no-cache-dir --disable-pip-version-check install -e . \
     && apk del .fetch-deps
 COPY corpus.json ./
+ENV ROOT_DIR="/var/lib/nautilus"
 RUN scaife-cts-api loadcorpus \
   && scaife-cts-api preload
 
