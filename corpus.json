@@ -1,13 +1,13 @@
 {
   "PerseusDL/canonical-latinLit": {
-    "ref": "0.0.871",
-    "sha": "c48d42c63d6397eaa09866983cab56ea08036d48",
-    "tarball_url": "https://api.github.com/repos/PerseusDL/canonical-latinLit/tarball/0.0.871"
+    "ref": "0.0.877",
+    "sha": "9ae80f4c0cf71c52e64228ea53c28809922d3e2b",
+    "tarball_url": "https://api.github.com/repos/PerseusDL/canonical-latinLit/tarball/0.0.877"
   },
   "PerseusDL/canonical-greekLit": {
-    "ref": "0.0.2887",
-    "sha": "fab48b2a59ff6f64ea96148e0a52820ecc752a4a",
-    "tarball_url": "https://api.github.com/repos/PerseusDL/canonical-greekLit/tarball/0.0.2887"
+    "ref": "0.0.2911",
+    "sha": "6e2efe938ac971d75ed41c05107461edb1a43f41",
+    "tarball_url": "https://api.github.com/repos/PerseusDL/canonical-greekLit/tarball/0.0.2911"
   },
   "OpenGreekAndLatin/csel-dev": {
     "ref": "1.0.223",
@@ -25,14 +25,14 @@
     "tarball_url": "https://api.github.com/repos/PerseusDL/canonical-pdlpsci/tarball/0.0.56"
   },
   "OpenGreekAndLatin/First1KGreek": {
-    "ref": "1.1.5548",
-    "sha": "cdacf1f80ca7abef67f1cb9a0772556afa87c2b1",
-    "tarball_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/tarball/1.1.5548"
+    "ref": "1.1.5622",
+    "sha": "678751aa81407614777592c76143ec2f55fa3c94",
+    "tarball_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/tarball/1.1.5622"
   },
   "OpenGreekAndLatin/Latin": {
-    "ref": "v1.11.0",
-    "sha": "796bf1fb05f7cf15c90e1b05f3e8d3683cd7162b",
-    "tarball_url": "https://api.github.com/repos/OpenGreekAndLatin/Latin/tarball/v1.11.0"
+    "ref": "v1.12.0",
+    "sha": "034ac92b345cb55c24e7923395637c602ba428d6",
+    "tarball_url": "https://api.github.com/repos/OpenGreekAndLatin/Latin/tarball/v1.12.0"
   },
   "lascivaroma/priapeia": {
     "ref": "1.1.18",
