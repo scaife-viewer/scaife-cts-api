@@ -9,6 +9,7 @@ RUN set -ex \
       libxml2-dev libxslt-dev \
     && python3 -m venv $VIRTUAL_ENV/ \
     && source $VIRTUAL_ENV/bin/activate \
+    && pip install pip wheel -U \
     && pip install -r requirements.txt \
     && apk del .build-deps
 COPY logging.ini setup.cfg setup.py ./
