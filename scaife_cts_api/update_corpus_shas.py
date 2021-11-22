@@ -4,6 +4,71 @@ import json
 from github import Github, UnknownObjectException
 
 
+class ReleaseResolver:
+    def __init__(self, client, repo_name, data):
+        self.client = client
+        self.repo_name = repo_name
+        self.prefer_default_branch = data.get("prefer_default", False)
+        self.sha = data["sha"]
+
+    def fetch_latest_release(self, repo):
+        latest_release = repo.get_latest_release()
+        self.ref = latest_release.tag_name
+        # NOTE: latest_commit_sha will differ from latest_release.target_committish, because
+        # the release was created and then the tag was advanced if a HookSet was used
+        self.latest_commit_sha = repo.get_commit(self.ref).sha
+        self.tarball_url = latest_release.tarball_url
+
+    def fetch_latest_commit(self, repo):
+        default_branch = repo.get_branch(repo.default_branch)
+        self.ref = default_branch.name
+        self.latest_commit_sha = default_branch.commit.sha
+        self.tarball_url = (
+            f"https://api.github.com/repos/{self.repo_name}/tarball/{self.latest_commit_sha}"
+        )
+
+    def resolve_release(self):
+        diff_url = ""
+        self.repo = self.client.get_repo(self.repo_name)
+
+        if self.prefer_default_branch:
+            self.fetch_latest_commit(self.repo)
+        else:
+            try:
+                self.fetch_latest_release(self.repo)
+            except UnknownObjectException:
+                print(
+                    f'{self.repo_name} has no release data.  retreiving latest SHA from "{repo.default_branch}"'
+                )
+                self.fetch_latest_commit(self.repo)
+
+        should_update = self.latest_commit_sha != self.sha
+        if should_update:
+            compared = self.repo.compare(self.sha, self.latest_commit_sha)
+            diff_url = compared.html_url
+        return should_update, diff_url
+
+    def emit_status(self, should_update, diff_url):
+        return [
+            self.repo.full_name,
+            should_update,
+            self.sha,
+            self.latest_commit_sha,
+            diff_url,
+        ]
+
+    def update_corpus(self, corpus_dict):
+        should_update, diff_url = self.resolve_release()
+
+        corpus_dict[self.repo_name] = dict(
+            ref=self.ref,
+            sha=self.latest_commit_sha,
+            tarball_url=self.tarball_url,
+            prefer_default_branch=self.prefer_default_branch,
+        )
+        return self.emit_status(should_update, diff_url)
+
+
 def main():
     """
     Small helper script used to update to latest releases
@@ -18,48 +83,15 @@ def main():
     else:
         client = Github()
 
-    status = []
+    statuses = []
     corpus = json.load(open("corpus.json"))
     new_corpus = dict()
     for repo_name, data in corpus.items():
-        sha = data["sha"]
-        diff_url = ""
-        repo = client.get_repo(repo_name)
-        try:
-            latest_release = repo.get_latest_release()
-            ref = latest_release.tag_name
-            # NOTE: latest_commit_sha will differ from latest_release.target_committish, because
-            # the release was created and then the tag was advanced if a HookSet was used
-            latest_commit_sha = repo.get_commit(ref).sha
-            tarball_url = latest_release.tarball_url
-        except UnknownObjectException:
-            print(
-                f'{repo_name} has no release data.  retreiving latest SHA from "{repo.default_branch}"'
-            )
-            default_branch = repo.get_branch(repo.default_branch)
-            ref = default_branch.name
-            latest_commit_sha = default_branch.commit.sha
-            tarball_url = f"https://api.github.com/repos/{repo_name}/tarball/{latest_commit_sha}"
+        resolver = ReleaseResolver(client, repo_name, data)
 
-        should_update = latest_commit_sha != sha
-        if should_update:
-            compared = repo.compare(sha, latest_commit_sha)
-            diff_url = compared.html_url
+        status_result = resolver.update_corpus(new_corpus)
+        statuses.append(status_result)
 
-        new_corpus[repo_name] = dict(
-            ref=ref,
-            sha=latest_commit_sha,
-            tarball_url=tarball_url
-        )
-        status.append(
-            [
-                repo.full_name,
-                should_update,
-                sha,
-                latest_commit_sha,
-                diff_url,
-            ]
-        )
     json.dump(new_corpus, open("corpus.json", "w"), indent=2)
 
 
