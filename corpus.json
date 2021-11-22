@@ -10,9 +10,9 @@
     "tarball_url": "https://api.github.com/repos/PerseusDL/canonical-greekLit/tarball/0.0.2940"
   },
   "OpenGreekAndLatin/csel-dev": {
-    "ref": "1.0.250",
-    "sha": "41e8aadc5fab7c7af58e0b540d3a2c59ebd7c0c1",
-    "tarball_url": "https://api.github.com/repos/OpenGreekAndLatin/csel-dev/tarball/1.0.250"
+    "ref": "1.0.267",
+    "sha": "f4a3d9d1f78a46de137a33a9ffbe0de126324cc5",
+    "tarball_url": "https://api.github.com/repos/OpenGreekAndLatin/csel-dev/tarball/1.0.267"
   },
   "PerseusDL/canonical-farsiLit": {
     "ref": "0.0.11",
@@ -25,9 +25,9 @@
     "tarball_url": "https://api.github.com/repos/PerseusDL/canonical-pdlpsci/tarball/0.0.56"
   },
   "OpenGreekAndLatin/First1KGreek": {
-    "ref": "1.1.5669",
-    "sha": "20d1b7b971af52e5de3d4769eb05a8e142b5e159",
-    "tarball_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/tarball/1.1.5669"
+    "ref": "1.1.5714",
+    "sha": "afda8cd313f5aac9169c27253a28af6e7156cfad",
+    "tarball_url": "https://api.github.com/repos/OpenGreekAndLatin/First1KGreek/tarball/1.1.5714"
   },
   "OpenGreekAndLatin/Latin": {
     "ref": "v1.12.0",
