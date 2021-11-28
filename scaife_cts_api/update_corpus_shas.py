@@ -38,7 +38,7 @@ class ReleaseResolver:
                 self.fetch_latest_release(self.repo)
             except UnknownObjectException:
                 print(
-                    f'{self.repo_name} has no release data.  retreiving latest SHA from "{repo.default_branch}"'
+                    f'{self.repo_name} has no release data.  retreiving latest SHA from "{self.repo.default_branch}"'
                 )
                 self.fetch_latest_commit(self.repo)
 
