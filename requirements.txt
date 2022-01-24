@@ -12,7 +12,9 @@ idna==2.7
 isodate==0.6.0
 itsdangerous==0.24
 jinja2==2.11.3
-lxml==4.6.5
+# NOTE: lxml > 4.6.3 seems to introduce some strange
+# parsing artifacts; keep it pinned here for now.
+lxml==4.6.3
 markupsafe==1.1.1
 # mycapytain==2.0.9
 # @@@ backport https://github.com/Capitains/MyCapytain/pull/200
