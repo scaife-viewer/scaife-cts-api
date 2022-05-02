@@ -1,8 +1,8 @@
 steps:
-- name: gcr.io/cloud-builders/docker
+- name: "gcr.io/cloud-builders/docker"
   args:
   - build
-  - --tag=gcr.io/scaife-viewer/scaife-cts-api:$COMMIT_SHA
-  - "."
+  - "--tag=gcr.io/scaife-viewer/scaife-cts-api:latest"
+  - .
 images:
-- gcr.io/scaife-viewer/scaife-cts-api:$COMMIT_SHA
+- "gcr.io/scaife-viewer/scaife-cts-api:latest"
