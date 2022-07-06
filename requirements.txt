@@ -14,7 +14,7 @@ itsdangerous==0.24
 jinja2==2.11.3
 # NOTE: lxml > 4.6.3 seems to introduce some strange
 # parsing artifacts; keep it pinned here for now.
-lxml==4.6.3
+lxml==4.9.1
 markupsafe==1.1.1
 # mycapytain==2.0.9
 # @@@ backport https://github.com/Capitains/MyCapytain/pull/200
