@@ -1,0 +1,12 @@
+{
+  "redirects": {
+    "/api/cts": {
+      "url": "https://github.com/scaife-viewer/scaife-viewer/issues/590",
+      "status": 302
+    },
+    "/": {
+      "url": "https://github.com/scaife-viewer/scaife-viewer/issues/590",
+      "status": 302
+    }
+  }
+}
